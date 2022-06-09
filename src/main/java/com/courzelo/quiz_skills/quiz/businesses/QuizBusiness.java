@@ -256,6 +256,7 @@ public class QuizBusiness implements IServiceQuiz {
 
 
         switch(quiz.getEvaluationmodel()) {case ALL_OR_NOTHING: {
+          //  quiz.getQuestionsList().stream().map(questions -> questions.getPoints()).count();
             for (int i = 0; i <= quiz.getQuestionsList().size() - 1; i++) { nb+=quiz.getQuestionsList().get(i).getPoints();
 
 
