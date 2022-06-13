@@ -1,14 +1,18 @@
 package com.courzelo.quiz_skills.quiz.servicerest;
 
-import com.courzelo.quiz_skills.quiz.entities.Quiz;
-import com.courzelo.quiz_skills.quiz.entities.dtos.QuizDTO;
+import com.courzelo.quiz_skills.quiz.entities.quizz.Quiz;
+
+import com.courzelo.quiz_skills.quiz.entities.dtos.quizz.QuizDTO;
 import com.courzelo.quiz_skills.quiz.repositories.QuizRepository;
 import com.courzelo.quiz_skills.quiz.servicerest.iservicesrest.IServiceRestQuiz;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
+
 import java.util.stream.Collectors;
 
 @Service
@@ -17,6 +21,7 @@ public class QuizService implements IServiceRestQuiz {
     ModelMapper mapper=new ModelMapper();
     @Autowired
     QuizRepository quizrepository;
+
 
 
 
@@ -31,6 +36,7 @@ public class QuizService implements IServiceRestQuiz {
 
     @Override
     public QuizDTO updatequiz(String id, QuizDTO quizdto) {
+
         Quiz quiz = mapper.map(quizdto, Quiz.class);
         Quiz foundedquiz=quizrepository.findById(id).orElseGet(Quiz::new);
         foundedquiz.setTitle(quiz.getTitle());
@@ -44,6 +50,8 @@ public class QuizService implements IServiceRestQuiz {
         foundedquiz.setFinalscore(quiz.getFinalscore());
         foundedquiz.setNbquestions(quiz.getNbquestions());
         foundedquiz.setQuestionsList(quiz.getQuestionsList());
+
+        foundedquiz.setCorrectionsList(quiz.getCorrectionsList());
         Quiz newquiz=quizrepository.save(foundedquiz);
 
 

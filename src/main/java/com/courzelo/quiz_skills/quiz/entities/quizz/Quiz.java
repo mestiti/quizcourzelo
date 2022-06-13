@@ -1,15 +1,11 @@
-package com.courzelo.quiz_skills.quiz.entities;
-
-
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
+package com.courzelo.quiz_skills.quiz.entities.quizz;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -40,6 +36,8 @@ public class Quiz {
     private Evaluation_model evaluationmodel;
     private float finalscore;
     private List<Questions> questionsList;
+    private List<Corrections> correctionsList;
+
 
 
     public Quiz() {

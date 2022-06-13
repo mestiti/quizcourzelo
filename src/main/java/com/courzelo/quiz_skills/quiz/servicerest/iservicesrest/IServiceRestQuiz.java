@@ -1,6 +1,6 @@
 package com.courzelo.quiz_skills.quiz.servicerest.iservicesrest;
 
-import com.courzelo.quiz_skills.quiz.entities.dtos.QuizDTO;
+import com.courzelo.quiz_skills.quiz.entities.dtos.quizz.QuizDTO;
 
 import java.util.List;
 

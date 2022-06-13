@@ -1,6 +1,6 @@
 package com.courzelo.quiz_skills.quiz.controllers;
 
-import com.courzelo.quiz_skills.quiz.entities.dtos.QuizDTO;
+import com.courzelo.quiz_skills.quiz.entities.dtos.quizz.QuizDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,23 +20,52 @@ public class QuizController {
 		return  iquiz.getquizbyid(id);
 
 	}
-	@PostMapping("/getscoreqcu/{id}")
-	public float calculatescoreqcu(@PathVariable("id") String id, @RequestBody QuizDTO quizdto) {
+	@PostMapping("/getscoreqcu/{id}/{idUser}")
+	public float calculatescoreqcu(@PathVariable("id") String id, @RequestBody QuizDTO quizdto,@PathVariable("idUser") Long idUser) {
 
-		return iquiz.calculatescoreqcu(id,quizdto);
+		return iquiz.calculatescoreqcu(id,quizdto,idUser);
 	}
 
-	@PostMapping("/getscoreqcm/{id}")
-	public float calculatescoreqcm(@PathVariable("id") String id, @RequestBody QuizDTO quizdto) {
+	@PostMapping("/getscoreqcm/{id}/{idUser}")
+	public float calculatescoreqcm(@PathVariable("id") String id, @RequestBody QuizDTO quizdto,@PathVariable("idUser") Long idUser) {
 
 
-		return iquiz.calculatescoreqcm(id,quizdto);
+		float score=0;
+		switch(iquiz.getquizbyid(id).getEvaluationmodel()) {
+			case ALL_OR_NOTHING: {
+				score+= iquiz.getqcmallornothing(id,quizdto,idUser);
+
+				break;}
+			case PARTIAL_CREDIT:{
+				score+= iquiz.getqcmpartialcredit(id,quizdto,idUser);
+				break;}
+			case GUESSING_PENALTY:{
+				score+= iquiz.getqcmguessingpenalty(id,quizdto,idUser);
+				break;
+			}
+		}
+
+
+		return score;
 	}
-	@PostMapping("/getscoreopenquestion/{id}")
-	public float calculatescoreopenquestion(@PathVariable("id") String id, @RequestBody QuizDTO quizdto) {
+	@PostMapping("/getscoreopenquestion/{id}/{idUser}")
+	public float calculatescoreopenquestion(@PathVariable("id") String id, @RequestBody QuizDTO quizdto,@PathVariable("idUser") Long idUser) {
+		float score=0;
+		switch(iquiz.getquizbyid(id).getEvaluationmodel()) {
+			case ALL_OR_NOTHING: {
+				score+= iquiz.getopenquestionsallornothing(id,quizdto,idUser);
+
+				break;}
+			case PARTIAL_CREDIT:{
+				score+= iquiz.getopenquestionspartialcredit(id,quizdto,idUser);
+				break;}
+			case GUESSING_PENALTY:{
+				score+= iquiz.getopenquestionsguessingpenalty(id,quizdto,idUser);
+				break;
+			}
+		}
 
 
-		return iquiz.calculatescoreopenquestions(id,quizdto);
-	}
+		return score;}
 
 }

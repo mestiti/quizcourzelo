@@ -1,9 +1,11 @@
-package com.courzelo.quiz_skills.quiz.entities.dtos;
+package com.courzelo.quiz_skills.quiz.entities.dtos.quizz;
 
-import com.courzelo.quiz_skills.quiz.entities.Evaluation_model;
+
+import com.courzelo.quiz_skills.quiz.entities.quizz.Evaluation_model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class QuizDTO {
     private Evaluation_model evaluationmodel;
     private float finalscore;
     private List<QuestionsDTO> questionsList;
-
+    private List<CorrectionsDTO> correctionsList;
 
 
     public QuizDTO() {

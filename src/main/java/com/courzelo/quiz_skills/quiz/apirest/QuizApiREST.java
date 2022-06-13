@@ -1,7 +1,7 @@
 package com.courzelo.quiz_skills.quiz.apirest;
 
 
-import com.courzelo.quiz_skills.quiz.entities.dtos.QuizDTO;
+import com.courzelo.quiz_skills.quiz.entities.dtos.quizz.QuizDTO;
 import com.courzelo.quiz_skills.quiz.servicerest.iservicesrest.IServiceRestQuiz;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,6 @@ public class QuizApiREST {
 
     @PostMapping("/add_quiz")
     public ResponseEntity<QuizDTO> addquiz(@RequestBody QuizDTO quiz) {
-
         QuizDTO quizresponse= iquiz.addquiz(quiz);
         return new ResponseEntity<>(quizresponse,HttpStatus.CREATED);
     }
@@ -43,7 +42,7 @@ public class QuizApiREST {
     }
     @GetMapping("/getall_quiz")
     public List<QuizDTO> getallquiz() {
-    return iquiz.getallquiz();
+        return iquiz.getallquiz();
 
     }
 }
