@@ -1,11 +1,14 @@
 package com.courzelo.quiz_skills.quiz.apirest;
 
 import com.courzelo.quiz_skills.quiz.entities.dtos.projets.ProjectDTO;
+import com.courzelo.quiz_skills.quiz.entities.dtos.quizz.QuizDTO;
 import com.courzelo.quiz_skills.quiz.servicerest.iservicesrest.IServiceRestProject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping( "/api/Project" )
@@ -42,6 +45,11 @@ public class ProjectApiRest {
     public ProjectDTO showprojectbyid(@PathVariable("id") String id) {
 
         return  iproject.getprojectbyid(id);
+
+    }
+    @GetMapping("/getall_project")
+    public List<ProjectDTO> getallproject() {
+        return iproject.getall();
 
     }
 }
